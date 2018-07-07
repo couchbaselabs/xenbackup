@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# ./xenbackup  backup 3224053d-ac90-a230-0b35-5ee56c1ec955  --backupname  ktest  --cluster xcp-s625 --config-file ./xenbackup.json
 
 import os
 import sys
@@ -43,7 +44,7 @@ def setup_logging(args):
 def generate_name(uuid, args):
     backup_name = ''
     if args.backup_name:
-        backup_name = args.backup_name
+        backup_name = args.backup_name + '_'
     return 'backup_' + backup_name + uuid + '_' + time.strftime("%Y%m%d-%H%M", time.gmtime())
 
 
@@ -350,7 +351,6 @@ def parse_args():
     parser.add_argument('--username', '-l', help='Username')
     parser.add_argument('--password', '-p', help='Password')
     parser.add_argument('--repository', '-r', help='Path where the backups are stored')
-    parser.add_argument('--backup-name', '-backup-name', help='Additional name to append to backup filename')
 
     parser.add_argument('--syslog', '-s', help='Log to syslog instead of stderr', action='store_true')
     parser.add_argument('--verbose', '-v', help='be more verbose', action='count', default=0)
@@ -366,6 +366,7 @@ def parse_args():
     backup_parser = subparsers.add_parser('backup', help='Create new Backup(s)')
     backup_parser.add_argument('uuid', help='VM UUID(s)', nargs='*')
     backup_parser.add_argument('--limit', help='Only backup vms with custom fields backup = 1', action='store_true')
+    backup_parser.add_argument('--backup-name', help='Additional name to append to backup filename')
     backup_parser.set_defaults(func=backup)
 
     # restore
