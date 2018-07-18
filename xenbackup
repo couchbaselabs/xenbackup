@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# ./xenbackup  backup 3224053d-ac90-a230-0b35-5ee56c1ec955  --backupname  ktest  --cluster xcp-s625 --config-file ./xenbackup.json
+# ./xenbackup  backup 3224053d-ac90-a230-0b35-5ee56c1ec955  --backup-name  ktest  --cluster xcp-s625 --config-file ./xenbackup.json
 
 import os
 import sys
